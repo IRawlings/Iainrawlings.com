@@ -81,7 +81,9 @@ s3_upload: publish
 	@{ \
 	echo "Please add a git commit comment: \n" ;\
 	read gitcomment ;\
+	git add . ;\
 	git commit -m "$${gitcomment}" ;\
+	git push ;\
 	TEMP=$$(aws cloudfront create-invalidation --distribution-id "$(CLOUDFRONT_DIST_ID)" --paths "/" | jq -r  '.Invalidation.Id')  ;\
 	echo "Invalidating Cloudfront cache..." ;\
 	aws cloudfront wait invalidation-completed --id "$${TEMP}" --distribution-id "$(CLOUDFRONT_DIST_ID)" ;\
