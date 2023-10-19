@@ -4,8 +4,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tags &mdash; IainRawlings.com</title>
+  <title>SSH &mdash; IainRawlings.com</title>
   <meta name="author" content="Iain Rawlings">
+
+
 
 
 
@@ -39,27 +41,48 @@
       <li >
         <a href="./category/blog.html">Blog</a>
       </li>
-      <li >
+      <li class="active">
         <a href="./category/linux.html">Linux</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Tags</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">SSH</h1>
+    <p class="meta">
+<time datetime="2023-10-19T00:00:00+01:00" pubdate>Thu 19 October 2023</time>
+<!--  Default pubdate was article.locale_date, changed to article.date for testing purposes.-->    </p>
+</header>
 
-	<p>
-		<a href="./tag/aws.html">AWS</a> (2)<br>
-		<a href="./tag/blog.html">Blog</a> (4)<br>
-		<a href="./tag/cloudfront.html">Cloudfront</a> (1)<br>
-		<a href="./tag/pelican.html">Pelican</a> (6)<br>
-		<a href="./tag/setup.html">Setup</a> (4)<br>
-		<a href="./tag/ssh.html">SSH</a> (1)<br>
-	</p>
-	</article>
+  <div class="entry-content"><p>Let me start by saying I have a number of Raspberry Pi's of varying models right from the pi 1 to the pi 4. All of these are set  up to use SSH private keys to access. </p>
+<p>Because these have all been set up over many years and at different points the key situation was a bit of a mess. So today I decided to remedy that.</p>
+<p>replacing the keys on the devices to make access simpler for myself I ran into an odd problem due to my use of Pageant for the forwarding agent.</p>
+<p>Using Pagent means I have to convert the keys to .ppk files to load them for forwarding.</p>
+<p>However when generating a new key, Puttygen would not import the keypair. A quick google suggested that I would need to convert the format of the key to PEM.</p>
+<p>I used the following command from the ssh folder on my pi 4: </p>
+<p><code>ssh-keygen -p -f id_rsa -m PEM</code> </p>
+<p>This forces the password to be changed (providing you can supply the old one of course!) and changes the format to PEM.</p>
+<p>Once I had done this and passed the key to Puttygen, I was able to load and convert to .ppk and add to Pageant.</p>
+<p>Just a note, if you've ended up here because you're struggling with SSH keys not validating, you should also check the permissions of the <code>~/.ssh</code> folder and all files within it such as <code>authorized_keys</code> and the private and publoc keyfiles.</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        Iain Rawlings
+    </span>
+  </span>
+<time datetime="2023-10-19T00:00:00+01:00" pubdate>Thu 19 October 2023</time>
+<!--  Default pubdate was article.locale_date, changed to article.date for testing purposes.-->  <span class="categories">
+    <a class='category' href='./category/linux.html'>Linux</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="./tag/ssh.html">SSH</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
 </div>
 <aside class="sidebar">
   <section>

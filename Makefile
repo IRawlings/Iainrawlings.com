@@ -79,6 +79,9 @@ s3_upload: publish
 	aws s3 cp "$(OUTPUTDIR)"/ s3://$(S3_BUCKET) --recursive
 # {} signifies bash in makefile, also @ will suppress make from echoing the command to avoid confusion.
 	@{ \
+	echo "Please add a git commit comment: \n" ;\
+	read gitcomment ;\
+	git commit -m "$${gitcomment}" ;\
 	TEMP=$$(aws cloudfront create-invalidation --distribution-id "$(CLOUDFRONT_DIST_ID)" --paths "/" | jq -r  '.Invalidation.Id')  ;\
 	echo "Invalidating Cloudfront cache..." ;\
 	aws cloudfront wait invalidation-completed --id "$${TEMP}" --distribution-id "$(CLOUDFRONT_DIST_ID)" ;\
