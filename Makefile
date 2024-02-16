@@ -10,6 +10,7 @@ CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
 S3_BUCKET=iainrawlings.com
+# Added CLOUDFRONT DIST ID to allow cache invalidation
 CLOUDFRONT_DIST_ID=E1KXVSFIKUXWDG
 PEND="""
 
@@ -76,8 +77,10 @@ publish:
 # This is a little all over the place as its a combination of make and bash. Confusing to follow
 s3_upload: publish
 	pelican content
+# copy the output to the specified S3 bucket
 	aws s3 cp "$(OUTPUTDIR)"/ s3://$(S3_BUCKET) --recursive
 # {} signifies bash in makefile, also @ will suppress make from echoing the command to avoid confusion.
+# Regarding the bash below lets remember it's $ for make and a $ for bash, resulting in $$ specifically for bash level vars
 	@{ \
 	echo "Please add a git commit comment: \n" ;\
 	read gitcomment ;\
@@ -89,7 +92,7 @@ s3_upload: publish
 	aws cloudfront wait invalidation-completed --id "$${TEMP}" --distribution-id "$(CLOUDFRONT_DIST_ID)" ;\
 	echo "Invalidation request: $${TEMP} Completed. Upload Complete & Cache Reset" ;\
 	}
-
+# .PHONY stops files named as below interfering with commands such as make s3_upload (a file named s3_upload will break the make command without being listed as .PHONY)
 .PHONY: html help clean regenerate serve serve-global devserver publish s3_upload
 
 
