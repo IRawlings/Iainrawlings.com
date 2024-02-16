@@ -3,6 +3,7 @@ SITENAME = 'IainRawlings.com'
 SITEURL = 'IainRawlings.com'
 
 PATH = 'content'
+STATIC_PATHS = ['images']
 THEME = "/home/iain/projects/pelican/test/pelican-themes/octopress"
 TIMEZONE = 'Europe/London'
 
