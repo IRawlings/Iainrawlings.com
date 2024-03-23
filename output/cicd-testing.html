@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>More small fixes &mdash; IainRawlings.com</title>
+  <title>CI/CD Testing &mdash; IainRawlings.com</title>
   <meta name="author" content="Iain Rawlings">
 
 
@@ -53,13 +53,15 @@
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">More small fixes</h1>
+      <h1 class="entry-title">CI/CD Testing</h1>
     <p class="meta">
-<time datetime="2023-10-14T17:58:00+01:00" pubdate>Sat 14 October 2023</time>
+<time datetime="2024-03-23T00:00:00+00:00" pubdate>Sat 23 March 2024</time>
 <!--  Default pubdate was article.locale_date, changed to article.date for testing purposes.-->    </p>
 </header>
 
-  <div class="entry-content"><p>I modified the makefile to change the way the uploads occur. No longer will aws cli complain about ACL's not existing when trying to upload to S3, as we're now using <code>aws s3 cp</code> to copy the files to the bucket instead.                                                                               </p></div>
+  <div class="entry-content"><p>Today we're starting to test Github actions out. </p>
+<p>Initially I've written a plain old bash script to test out the steps which github actions will be required to take. </p>
+<p>Lets see how it goes!</p></div>
     <footer>
 <p class="meta">
   <span class="byline author vcard">
@@ -67,12 +69,12 @@
         Iain Rawlings
     </span>
   </span>
-<time datetime="2023-10-14T17:58:00+01:00" pubdate>Sat 14 October 2023</time>
+<time datetime="2024-03-23T00:00:00+00:00" pubdate>Sat 23 March 2024</time>
 <!--  Default pubdate was article.locale_date, changed to article.date for testing purposes.-->  <span class="categories">
     <a class='category' href='./category/blog.html'>Blog</a>
   </span>
   <span class="categories">
-    <a class="category" href="./tag/pelican.html">Pelican</a>  </span>
+    <a class="category" href="./tag/cicd.html">CI/CD</a>  </span>
 </p><div class="sharing">
 </div>    </footer>
   </article>
