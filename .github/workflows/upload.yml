@@ -8,6 +8,9 @@ jobs:
     steps:
       - name: Checkout repository code # checkout the code first
         uses: actions/checkout@v4
-      - run: ./bash.sh # run the bash script
+      - name: Install Pelican
+        run: sudo apt-get install pelican Markdown
+      - name: Check pelican installed
+        run: pelican --version
 
 
