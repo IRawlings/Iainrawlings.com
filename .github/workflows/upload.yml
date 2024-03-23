@@ -9,7 +9,7 @@ jobs:
       - name: Checkout repository code # checkout the code first
         uses: actions/checkout@v4
       - name: Install Pelican
-        run: sudo apt-get install pelican Markdown
+        run: sudo apt-get install pelican markdown
       - name: Check pelican installed
         run: pelican --version
 
