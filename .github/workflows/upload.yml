@@ -8,6 +8,6 @@ jobs:
     steps:
       - name: Checkout repository code # checkout the code first
         uses: actions/checkout@v4
-      - run: bash.sh # run the bash script
+      - run: ./bash.sh # run the bash script
 
 
