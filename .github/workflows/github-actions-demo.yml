@@ -8,7 +8,7 @@ jobs: # each job has 'steps' to take
     steps: # steps to take in turn, note that seems include github vars (and could include secrets)
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event." # bunch of echo commands with vars nothing weird here. in a bit we'll name one of these run actions for giggle.
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - name: Echo the name of your branch - edited demo file to include this! # will this work I wonder
+      - name: CUSTOM NAME # will this work I wonder
         run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code # actually names the step, previous run commands just shows the command for lack of a name
         uses: actions/checkout@v4 #imports the checkout@v4 action to use in this YAML script
