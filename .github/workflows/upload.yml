@@ -1,0 +1,13 @@
+# Set some names, nothing weird here
+name: Automated Upload Workflow
+run-name: Workflow to generate and upload content
+on: [push] # Apply workflow on git push only
+jobs:
+  Run-Bash-Script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code # checkout the code first
+        uses: actions/checkout@v4
+      - run: bash.sh # run the bash script
+
+
