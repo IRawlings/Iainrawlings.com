@@ -10,7 +10,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Pelican
         run: sudo apt-get install pelican markdown
-      - name: Check pelican installed
-        run: pelican --version
-
+      - name: Check versions
+        run: |
+          pip3 install pelican[markdown]
+          pelican --version
+          markdown --version
 
