@@ -4,7 +4,7 @@ SITEURL = 'IainRawlings.com'
 
 PATH = 'content'
 STATIC_PATHS = ['images']
-THEME = "/home/iain/projects/pelican/test/pelican-themes/octopress"
+THEME = "./pelican-themes/octopress"
 TIMEZONE = 'Europe/London'
 
 DEFAULT_LANG = 'en'
