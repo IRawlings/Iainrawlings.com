@@ -1,5 +1,2 @@
 Makefile.save
 output/
-pelican-themes/*
-!pelican-themes/octopress
-!pelican-themes/octopress/*
