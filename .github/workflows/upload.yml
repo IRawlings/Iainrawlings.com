@@ -21,9 +21,7 @@ jobs:
       - name: Check output exists
         run: ls output
       - name: Upload content to s3
-        run: |
-        aws configure get region
-        aws s3 cp $OUTPUT_DIR s3://$S3_BUCKET --recursive
+        run: aws s3 cp $OUTPUT_DIR s3://$S3_BUCKET --recursive
       - name: Inv_cf_cache
         id: cf_invalidation_request
         run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/" | jq -r  ".Invalidation.Id" >> $GITHUB_OUTPUT # check this syntax
