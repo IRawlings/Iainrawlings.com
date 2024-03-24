@@ -2,17 +2,32 @@
 name: Automated Upload Workflow
 run-name: Workflow to generate and upload content
 on: [push] # Apply workflow on git push only
+
+env:
+  OUTPUT_DIR: output/
+  S3_BUCKET: iainrawlings.com
+  CLOUDFRONT_DIST: E1KXVSFIKUXWDG
+
 jobs:
-  Run-Bash-Script:
+  Tasks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository code # checkout the code first
         uses: actions/checkout@v4
       - name: Install Pelican
-        run: sudo apt-get install pelican markdown
-      - name: Check versions
+        run: pip3 install pelican[markdown]
+      - name: Create static content from output
+        run: pelican content
+      - name: Upload content to s3
+        run: aws s3 cp $OUTPUT_DIR s3://$S3_BUCKET --recursive
+      - name: Inv_cf_cache
+        run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/" | jq -r  ".Invalidation.Id" >> $GITHUB_OUTPUT
+        id: cf_invalidation_request
+        run: echo "Invalidating cloudfront cache..."
+      - name: Await_cf_inv
         run: |
-          pip3 install pelican[markdown]
-          pelican --version
-          markdown --version
+        aws cloudfront wait invalidation-completed --id ${{ steps.Inv_cf_cache.outputs.cf_invalidation_request }} --distribution-id $CLOUDFRONT_DIST
+        echo "Invalidation request: ${{ steps.Inv_cf_cache.outputs.cf_invalidation_request }} Completed. Upload Complete & Cache Reset"
 
+
+          
