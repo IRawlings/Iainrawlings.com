@@ -21,13 +21,15 @@ jobs:
       - name: Upload content to s3
         run: aws s3 cp $OUTPUT_DIR s3://$S3_BUCKET --recursive
       - name: Inv_cf_cache
-        run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/" | jq -r  ".Invalidation.Id" >> $GITHUB_OUTPUT # check this syntax
         id: cf_invalidation_request
-        run: echo "Invalidating cloudfront cache..."
-      - name: Await_cf_inv
-        run: | # we need to talk about this tomorrow, I think I've got close to the right syntax but since this can get pretty confusing we'll check it over.
-        aws cloudfront wait invalidation-completed --id ${{ steps.Inv_cf_cache.outputs.cf_invalidation_request }} --distribution-id $CLOUDFRONT_DIST
-        echo "Invalidation request: ${{ steps.Inv_cf_cache.outputs.cf_invalidation_request }} Completed. Upload Complete & Cache Reset"
+        run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/" | jq -r  ".Invalidation.Id" >> $GITHUB_OUTPUT # check this syntax
+      - name: echo github output
+        run: echo $GITHUB_OUTPUT
+        # run: echo "Invalidating cloudfront cache..."
+      # - name: Await_cf_inv
+        # run: | # we need to talk about this tomorrow, I think I've got close to the right syntax but since this can get pretty confusing we'll check it over.
+        # aws cloudfront wait invalidation-completed --id ${{ steps.Inv_cf_cache.outputs.cf_invalidation_request }} --distribution-id $CLOUDFRONT_DIST
+        # echo "Invalidation request: ${{ steps.Inv_cf_cache.outputs.cf_invalidation_request }} Completed. Upload Complete & Cache Reset"
 
 
           
