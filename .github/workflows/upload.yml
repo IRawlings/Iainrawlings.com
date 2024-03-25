@@ -25,7 +25,9 @@ jobs:
       - name: Create static content from output
         run: pelican content
       - name: Check output exists
-        run: ls output
+        run: |
+        ls output
+        aws configure get region
       - name: Upload content to s3
         run: aws s3 cp $OUTPUT_DIR s3://$S3_BUCKET --recursive
       - name: Inv_cf_cache
