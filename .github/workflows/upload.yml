@@ -30,7 +30,7 @@ jobs:
         run: aws s3 cp $OUTPUT_DIR s3://$S3_BUCKET --recursive
       - name: Inv_cf_cache
         id: cf_invalidation_request
-        run: aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/" | jq -r  ".Invalidation.Id" >> $GITHUB_OUTPUT # check this syntax
+        run: inv_request=$(aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DIST_ID }} --paths "/" | jq -r  ".Invalidation.Id")
       - name: echo github output
         run: echo $GITHUB_OUTPUT
         # run: echo "Invalidating cloudfront cache..."
