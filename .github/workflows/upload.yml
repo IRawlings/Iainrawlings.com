@@ -35,7 +35,7 @@ jobs:
           echo "inv_request=$rtn_str" >> $GITHUB_OUTPUT
 
       - name: Echo invalidation request ID
-        run: echo "Invlaidation Request is ${{ steps.cf_invalidation_request }}"
+        run: echo "Invlaidation Request is ${{ steps.cf_invalidation_request.outputs.inv_request}}"
       
 
 
