@@ -18,7 +18,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_GHA_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_GHA_SECRET }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Checkout repository code # checkout the code first
+      - name: Checkout Repository Code # checkout the code first
         uses: actions/checkout@v4
       - name: Install Pelican
         run: pip3 install pelican[markdown]
@@ -34,7 +34,7 @@ jobs:
           rtn_str=$(aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DIST }} --paths "/" | jq -r  ".Invalidation.Id")
           echo "inv_request=$rtn_str" >> $GITHUB_OUTPUT
       - name: Echo invalidation request ID
-        run: echo "Invlaidation Request is ${{ steps.cf_validation_request.output.inv_request}}"
+        run: echo "Invlaidation Request is ${{ steps.cf_invalidation_request.output.inv_request}}"
       
 
 
