@@ -33,9 +33,12 @@ jobs:
         run: |
           rtn_str=$(aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DIST }} --paths "/" | jq -r  ".Invalidation.Id")
           echo "inv_request=$rtn_str" >> $GITHUB_OUTPUT
-
       - name: Echo invalidation request ID
         run: echo "Invlaidation Request is ${{ steps.cf_invalidation_request.outputs.inv_request}}"
+      - name: await invalidation complete
+        run: |
+          aws cloudfront wait invalidation-completed --id ${{ steps.cf_invalidation_request.outputs.inv_request}} --distribution-id ${{ env.CLOUDFRONT_DIST }}
+          echo "Invalidation ${{ steps.cf_invalidation_request.outputs.inv_request}} complete"
       
 
 
