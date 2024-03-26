@@ -8,6 +8,8 @@ Summary: Setting up CI/CD
 
 # Setting Up Continuous Integration / Continuous Deployment
 
+Edit: This post is a work in progress for now.
+
 Initially, as part of my journey to learning more skills I decided to set up a homelab some time ago. As part of that homelab, I decided I would like to host a blog for a few different reasons:
 
 * A blog would become a place I could document things I learn, allowing me to showcase these where needed.
